@@ -31,5 +31,18 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Запуск тестов
-        run: npm test
+        run: npm t
+
+      - name: Запускаем генерацию allure в одном файле
+        run: npm run allureFile 
+        if: always()   
+        continue-on-error: false 
+
+      #сохраняем результаты  
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+            name: playwright-report
+            path: playwright-report/
+            retention-days: 30
 
