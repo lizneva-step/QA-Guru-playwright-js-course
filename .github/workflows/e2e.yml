@@ -1,0 +1,31 @@
+name: E2E;
+# Когда запусаем
+on 
+    push:
+        branches: 
+           - main
+    workflow_dispatch:
+    # ручной запуск
+    # описываем джобы
+    # среди всех свободных раннеров выбери ту, где убунту посл версии
+        jobs:
+        test:
+            timeout-minutes: 60
+            runs-on: ubuntu-latest
+            steps:
+                - name: Checkoute code
+                uses: actions/checkout@v5
+                - name: Уcтановка Node.js
+                uses: actions/setup-node.js
+                with:
+                    node-version: lts/*
+                - name: Установка пакетов
+                    run: nmp i
+                - name: Устанавливаем браузеры
+                   run: npx playwright install --with deps
+                - name: Запускаем тесты
+                  run: npm t
+            
+
+
+
