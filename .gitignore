@@ -13,6 +13,7 @@ Thumbs.db
 # Allure results and reports
 allure-results/
 allure-report/
+.allure/history.jsonl
 
 # Node.js
 node_modules/
